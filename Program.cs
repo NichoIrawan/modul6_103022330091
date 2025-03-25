@@ -1,4 +1,5 @@
 ﻿using modul6;
+using System.Text;
 
 public class Program
 {
@@ -31,5 +32,38 @@ public class Program
 
         //Detail akun
         akun.printAllVideoPlayCount();
+
+        //Testing DbC
+        StringBuilder username = new StringBuilder();
+        while (username.Length < 110)
+        {
+            username.Append(new Random().Next(99999).ToString());
+        }
+
+        StringBuilder judul = new StringBuilder();
+        while (judul.Length < 210)
+        {
+            judul.Append(new Random().Next(99999).ToString());
+        }
+
+        SayaTubeUser akun_test_2 = new SayaTubeUser(username.ToString());
+
+        SayaTubeVideo video_test_2 = new SayaTubeVideo(judul.ToString());
+
+        akun.getUploadedVideos().ElementAt(0).increasePlayCount(100000000);
+        akun.getUploadedVideos().ElementAt(0).increasePlayCount(-1);
+
+        while (video_test_2.getPlayCount() < int.MaxValue - 20000000)
+        {
+            video_test_2.increasePlayCount(20000000);
+        }
+        video_test_2.increasePlayCount(20000000);
+        akun.addVideo(video_test_2);
+
+        akun.getTotalVideoPlayCount();
+
+        //SayaTubeUser akun_test_1 = new SayaTubeUser(null);
+        //SayaTubeVideo video_test_1 = new SayaTubeVideo(null);
+        //akun.addVideo(null);
     }
 }
